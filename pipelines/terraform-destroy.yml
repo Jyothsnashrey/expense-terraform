@@ -22,7 +22,7 @@ pipelines:
               tasks:
               - exec:
                   command: terraform
-                  arguments: ["init","backend-config=env-dev/state.tfvars," ]
+                  arguments: ["init","-backend-config=env-dev/state.tfvars," ]
 
               - exec:
                   command: terraform
