@@ -26,7 +26,7 @@ pipelines:
 
               - exec:
                   command: terraform
-                  arguments: [ "destroy","var-file=env-dev/main.tfvars", "-auto-approve" ]
+                  arguments: [ "destroy","-var-file=env-dev/main.tfvars","-auto-approve" ]
 
       - QA:
           fetch_materials: true
