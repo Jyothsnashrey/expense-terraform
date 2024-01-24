@@ -1,7 +1,7 @@
 module "vpc" {
   source          = "./modules/vpc"
   for_each        = var.vpc
-  vpc_cird        = lookup(each.value, "vpc_cidr", null)
+  vpc_cidr        = lookup(each.value, "vpc_cidr", null)
   subnets_cidr   = lookup (each.value, "subnets_cidr", null)
   az              = lookup(each.value, "az" , null)
   env             = var.env
