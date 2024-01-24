@@ -63,9 +63,9 @@ resource "aws_security_group" "test" {
 }
 
   tags = {
-    Name = "test"
+    Name = "allow_tls"
   }
-}
+
 
 resource "aws_instance" "test"{
         ami           = data.aws_ami.example.image_id
