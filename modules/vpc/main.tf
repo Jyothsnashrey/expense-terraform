@@ -65,6 +65,7 @@ resource "aws_security_group" "test" {
   tags = {
     Name = "test"
   }
+}
 
 resource "aws_instance" "test"{
         ami           = data.aws_ami.example.image_id
