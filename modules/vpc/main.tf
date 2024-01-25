@@ -55,7 +55,7 @@ resource "aws_route_table" "public" {
 
 resource "aws_route_table_association" "public" {
   count          = length(var.private_subnets_cidr)
-  route_table_id = lookup(element(aws_route_table, count.index), "id", null)
+  route_table_id = lookup(element(aws_route_table.public,count.index), "id", null)
   subnet_id = lookup(element(aws_subnet.public, count.index), "id", null)
 
 }
