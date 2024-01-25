@@ -60,6 +60,20 @@ resource "aws_route_table_association" "public" {
 
 }
 
+resource "aws_eip" "main" {
+  domain   = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  count          = length(var.private_subnets_cidr)
+  allocation_id  =  lookup(element(aws_eip.main,count.index), "id", null)
+  subnet_id      =  lookup(element(aws_subnet.public, count.index), "id", null)
+
+  tags = {
+    Name = "ngw-${count.index+1}"
+  }
+}
+
 resource    "aws_subnet" "private" {
   count      = length(var.private_subnets_cidr)
   vpc_id     = aws_vpc.main.id
@@ -70,15 +84,6 @@ resource    "aws_subnet" "private" {
     Name = "private_subnet-${count.index+1}"
   }
 }
-
-#resource "aws_vpc_peering_connection" "main" {
-#  vpc_id       = aws_vpc.main.id
-#  peer_vpc_id  = data.aws_vpc.default.id
-#  auto_accept =  true
-#  tags = {
-#    name = "${var.env}-vpc-with-default-vpc"
-#  }
-#}
 
 resource "aws_route" "main" {
   route_table_id            = aws_vpc.main.main_route_table_id
