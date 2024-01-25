@@ -11,7 +11,8 @@ resource    "aws_subnet" "public" {
   availability_zone = element(var.az, count.index)  #this created the subnets in the required zones.
 
   tags = {
-    Name = "subnet-${count.index}"
+    Name = "public_subnet-${count.index+1}"
+
   }
 }
 resource    "aws_subnet" "private" {
@@ -21,7 +22,7 @@ resource    "aws_subnet" "private" {
   availability_zone = element(var.az, count.index)  #this created the subnets in the required zones.
 
   tags = {
-    Name = "subnet-${count.index}"
+    Name = "private_subnet-${count.index+1}"
   }
 }
 
