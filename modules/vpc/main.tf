@@ -37,7 +37,7 @@ resource "aws_route" "default-vpc" {
 
 data "aws_ami" "example" {
   most_recent = true
-  name_regex = "centos-8-DevOps-practice"
+  name_regex = "Centos-8-DevOps-Practice"
   owners = ["973714476881"]
 }
 resource "aws_security_group" "test" {
