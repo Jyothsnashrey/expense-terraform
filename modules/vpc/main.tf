@@ -61,6 +61,7 @@ resource "aws_route_table_association" "public" {
 }
 
 resource "aws_eip" "main" {
+  count    = length(var.public_subnets_cidr)
   domain   = "vpc"
 }
 
