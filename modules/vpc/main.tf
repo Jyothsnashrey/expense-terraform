@@ -5,6 +5,15 @@ resource "aws_vpc" "main" {
   }
 }
 
+resource "aws_vpc_peering_connection" "main" {
+  vpc_id       = aws_vpc.main.id
+  peer_vpc_id  = data.aws_vpc.default.id
+  auto_accept =  true
+  tags = {
+    name = "${var.env}-vpc-with-default-vpc"
+  }
+}
+
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
@@ -34,11 +43,23 @@ resource "aws_route_table" "public" {
     cidr_block = "0.0.0.0/0"  #internet
     gateway_id = aws_internet_gateway.main.id
   }
+  route {
+    cidr_block = data.aws_vpc.default.cidr_block
+    vpc_peering_connection_id = aws_vpc_peering_connection.main.id
+  }
 
   tags = {
     Name = "public_rt-${count.index+1}"
   }
 }
+
+resource "aws_route_table_association" "public" {
+  count          = length(var.private_subnets_cidr)
+  route_table_id = lookup(element(aws_route_table, count.index), "id", null)
+  subnet_id = lookup(element(aws_subnet.public, count.index), "id", null)
+
+}
+
 resource    "aws_subnet" "private" {
   count      = length(var.private_subnets_cidr)
   vpc_id     = aws_vpc.main.id
