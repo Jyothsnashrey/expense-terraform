@@ -13,7 +13,7 @@ vpc = {
   }
 }
 
-rds={
+rds = {
   main = {
     allocated_storage    = 10
     db_name              = "expense"
