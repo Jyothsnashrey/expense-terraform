@@ -1,19 +1,63 @@
 resource "aws_db_parameter_group" "main" {
-  name   = "rds-pg"
-  family = "mysql5.6"
+  name   = "${var.env}-${var.project_name}-pg"
+  family = var.family
 }
 
 
-resource "aws_db_instance" "default" {
 
+resource "aws_db_subnet_group" "main" {   #to tell here we need to create the DB
+  name       = "${var.env}-${var.project_name}-sg"
+  subnet_ids = var.subnets_ids
+
+  tags = {
+    Name = "${var.env}-${var.project_name}-sg"
+  }
+}
+
+resource "aws_security_group" "main" {
+    name        = "${var.env}-${var.project_name}rds-sg"
+    description = "${var.env}-${var.project_name}-rds-sg"
+    vpc_id      = var.vpc_id
+
+    ingress {
+      from_port        = 3306                   #mysql port
+      to_port          = 3306
+      protocol         = tcp             #ALL protocols
+      cidr_blocks      = var.sg_cidr_blocks            #public
+
+
+    }
+    egress {   #outbound rules
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+
+    tags = {
+      Name = "allow_tls"
+    }
+  }
+
+resource "aws_db_instance" "main" {
+
+  identifier           = "${var.env}-${var.project_name}-rds"
   allocated_storage    = var.allocated_storage
   db_name              = var.db_name
   engine               = var.engine
   engine_version       = var.engine_version
   instance_class       = var.instance_class
-  username             = var.username
-  password             = var.password
+  username             = data.aws_ssm_parameter.username.value
+  password             = data.aws_ssm_parameter.password.value
   parameter_group_name = aws_db_parameter_group.main.name #to make any custom configuration
   skip_final_snapshot  = true
   # when we try to delete it will ask for taking a snapshot we need to use false to get snapshot
+  storage_encrypted    = true
+  kms_key_id = var.kms_key_id
+  db_subnet_group_name = aws_db_subnet_group.main.name
+  vpc_security_group_ids = [aws_security_group.main.id]
 }
+
+
+

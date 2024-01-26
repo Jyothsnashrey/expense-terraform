@@ -1,6 +1,6 @@
 env = "dev"
 project_name = "expense"
-
+kms_key_id  = "arn:aws:kms:us-east-1:046694289523:key/61697761-0640-4796-8fb9-1e709acec556"
 vpc = {
   main = {
     vpc_cidr = "10.10.0.0/21"
