@@ -22,7 +22,7 @@ resource "aws_security_group" "main" {
     ingress {
       from_port        = 3306                   #mysql port
       to_port          = 3306
-      protocol         = tcp             #ALL protocols
+      protocol         = "tcp"            #ALL protocols
       cidr_blocks      = var.sg_cidr_blocks            #public
 
 
