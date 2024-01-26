@@ -13,19 +13,20 @@ module "vpc" {
 }
 
 module "rds" {
-  source = "./modules/rds"
-  for_each = var.rds
-  allocated_storage    = lookup(each.value, "allocated_storage", null)
-  db_name              = lookup(each.value, "db_name", null)
-  engine               = lookup(each.value, "engine", null)
-  engine_version       = lookup(each.value, "engine_version", null)
-  instance_class       = lookup(each.value, "instance_class ", null)
-  family               = lookup(each.value, "family", null) #paramater group will have family if you create manually
-  env                  = var.env
-  project_name         = var.project_name
-  kms_key_id           = var.kms_key_id
+  source            = "./modules/rds"
+  for_each          = var.rds
+  allocated_storage = lookup(each.value, "allocated_storage", null)
+  db_name           = lookup(each.value, "db_name", null)
+  engine            = lookup(each.value, "engine", null)
+  engine_version    = lookup(each.value, "engine_version", null)
+  instance_class    = lookup(each.value, "instance_class ", null)
+  family            = lookup(each.value, "family", null) #paramater group will have family if you create manually
+  env               = var.env
+  project_name      = var.project_name
+  kms_key_id        = var.kms_key_id
 
-  subnets_ids = lookup(lookup(module.vpc,"main", null), "db_subnets_ids", null)
-  vpc_id     =lookup(lookup(module.vpc,"main", null), "vpc_id", null)
-  sg_cidr_blocks = lookup(lookup(var.vpc,"main", null), "app_subnets_cidr", null)
+  subnets_ids    = lookup(lookup(module.vpc, "main", null), "db_subnets_ids", null)
+  vpc_id         = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
+  sg_cidr_blocks = lookup(lookup(var.vpc, "main", null), "app_subnets_cidr", null)
+}
 
