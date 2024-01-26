@@ -19,7 +19,7 @@ module "rds" {
   db_name           = lookup(each.value, "db_name", null)
   engine            = lookup(each.value, "engine", null)
   engine_version    = lookup(each.value, "engine_version", null)
-  instance_class    = lookup(each.value, "instance_class ", null)
+  instance_class    = lookup(each.value, "instance_class", null)
   family            = lookup(each.value, "family", null) #paramater group will have family if you create manually
   env               = var.env
   project_name      = var.project_name
