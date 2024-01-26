@@ -7,7 +7,7 @@ resource "aws_db_parameter_group" "main" {
 
 resource "aws_db_subnet_group" "main" {   #to tell here we need to create the DB
   name       = "${var.env}-${var.project_name}-sg"
-  subnet_ids = var.subnets_ids
+  subnet_ids = var.subnet_ids
 
   tags = {
     Name = "${var.env}-${var.project_name}-sg"
