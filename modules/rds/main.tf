@@ -14,5 +14,6 @@ resource "aws_db_instance" "default" {
   username             = var.username
   password             = var.password
   parameter_group_name = aws_db_parameter_group.main.name #to make any custom configuration
-  skip_final_snapshot  = true # when we try to delete it will ask for taking a snapshot we need to use false to get snao shot
+  skip_final_snapshot  = true
+  # when we try to delete it will ask for taking a snapshot we need to use false to get snapshot
 }
