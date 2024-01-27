@@ -2,7 +2,7 @@ env = "dev"
 project_name = "expense"
 kms_key_id  = "arn:aws:kms:us-east-1:046694289523:key/61697761-0640-4796-8fb9-1e709acec556"
 
-# bastion_cidrs = ["172.31.45.81/32"]  #/32 represents one IP.
+ bastion_cidrs = ["172.31.45.81/32"]  #/32 represents one IP.
 #vpc = {
 #  main = {
 #    vpc_cidr = "10.10.0.0/21"
@@ -44,7 +44,7 @@ rds_family               = "mysql5.7"
 
 
 
-#
-#backend_app_port = 8080
-#backend_instance_capacity = 1
-#backend_instance_type = "t3.small"
+
+backend_app_port = 8080
+backend_instance_capacity = 1
+backend_instance_type = "t3.small"
