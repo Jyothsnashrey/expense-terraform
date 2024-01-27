@@ -75,3 +75,18 @@ module "backend" {
 
 }
 
+module "frontend" {
+  source            = "./modules/app"
+  app_port          = var.frontend_app_port
+  bastion_cidrs     = var.bastion_cidrs
+  component         = "frontend"
+  env               = var.env
+  instance_capacity = var.frontend_instance_capacity
+  instance_type     = var.frontend_instance_type
+  project_name      = var.project_name
+  sg_cidr_blocks    = var.web_subnets_cidr
+  vpc_id            = module.vpc.vpc_id
+  vpc_zone_identifier = module.vpc.web_subnets_ids
+
+}
+
