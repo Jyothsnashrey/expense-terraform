@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "main" {
   desired_capacity   = var.instance_capacity
   max_size           = var.instance_capacity  # we shall fine tune after autoscaling
   min_size           = var.instance_capacity
-
+vpc_zone_identifier =  var.vpc_zone_identifier
   launch_template {
     id      = aws_launch_template.main.id
     version = "$Latest"
@@ -57,7 +57,7 @@ resource "aws_autoscaling_group" "main" {
   tag {
     key                 = "Name"
     value               = local.name
-    propagate_at_launch = true
+    propagate_at_launch = true  # for each instance you provide the tag.
   }
 }
 

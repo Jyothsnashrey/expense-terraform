@@ -7,4 +7,4 @@ variable "app_port"{}
 variable "sg_cidr_blocks" {}
 variable "instance_capacity" {}
 variable "project_name" {}
-variable "subnet_ids" {}
+variable "vpc_zone_identifier" {}

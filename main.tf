@@ -71,7 +71,7 @@ module "backend" {
   project_name      = var.project_name
   sg_cidr_blocks    = var.web_subnets_cidr
   vpc_id            = module.vpc.vpc_id
-  subnet_ids        = module.vpc.app_subnets_ids
+  vpc_zone_identifier = module.vpc.app_subnets_ids
 
 }
 
