@@ -57,7 +57,7 @@ module "rds" {
 
     subnet_ids    = module.vpc.app_subnets_ids
     vpc_id         =module.vpc.vpc_id
-   sg_cidr_blocks = var.app_subnet_cidr
+   sg_cidr_blocks = var.app_subnets_cidr
   }
 
 #module "backend" {

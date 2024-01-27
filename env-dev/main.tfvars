@@ -42,6 +42,10 @@ rds_instance_class       = "db.t3.micro"
 rds_family               = "mysql5.7"
 
 
+
+variable""{}
+variable""{}
+variable""{}
 #
 #backend_app_port = 8080
 #backend_instance_capacity = 1
