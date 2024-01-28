@@ -21,7 +21,7 @@ resource "aws_security_group" "main" {
 
 
   }
-  egress {   #outbound rules
+  egress {   #outbound rulesa
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
@@ -76,6 +76,52 @@ resource "aws_lb_target_group" "main" {
     unhealthy_threshold = 2
     interval = 5  #frequency of time you want to check it will check very 5 secs id target is good or bad this will be more responsive
     timeout = 2 # timeout for health check
+  }
+}
+
+
+resource "aws_iam_role" "main" {
+  name               = "${local.name}-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  inline_policy {
+    name = "parameter-store"
+
+    policy = jsonencode({
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "GetParameter",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:GetParameterHistory",
+            "ssm:GetParametersByPath",
+            "ssm:GetParameters",
+            "ssm:GetParameter"
+          ],
+          "Resource": "arn:aws:ssm:us-east-1:046694289523:parameter/${var.env}.${var.project_name}.${var.component}.*"
+        },
+        {
+          "Sid": "DescribeAllParameters",
+          "Effect": "Allow",
+          "Action": "ssm:DescribeParameters",
+          "Resource": "*"
+        }
+      ]
+    })
   }
 }
 
