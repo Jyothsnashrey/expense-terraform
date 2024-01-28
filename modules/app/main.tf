@@ -45,10 +45,11 @@ resource "aws_launch_template" "main" {
 
 resource "aws_autoscaling_group" "main" {
   name = "${local.name}-asg"
-  desired_capacity   = var.instance_capacity
-  max_size           = var.instance_capacity  # we shall fine tune after autoscaling
-  min_size           = var.instance_capacity
-vpc_zone_identifier =  var.vpc_zone_identifier
+  desired_capacity    = var.instance_capacity
+  max_size            = var.instance_capacity  # we shall fine tune after autoscaling
+  min_size            = var.instance_capacity
+  vpc_zone_identifier =  var.vpc_zone_identifier
+  target_group_arns = [aws_lb_target_group.main.arn]
   launch_template {
     id      = aws_launch_template.main.id
     version = "$Latest"
@@ -58,5 +59,12 @@ vpc_zone_identifier =  var.vpc_zone_identifier
     value               = local.name
     propagate_at_launch = true  # for each instance you provide the tag.
   }
+}
+
+resource "aws_lb_target_group" "main" {
+  name     = "${local.name}-tg"
+  port     = var.app_port      #if frontend 80 or 8080 for backend
+  protocol = "HTTP"
+  vpc_id   =  var.vpc_id
 }
 

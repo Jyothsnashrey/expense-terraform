@@ -111,11 +111,15 @@ module "private_alb" {
   alb_name         = "private"
   internal         = true
   sg_cidr_blocks   = var.web_subnets_cidr  # should be accessible only to front end
+
   project_name     = var.project_name
   env              = var.env
+  acm_arn          = var.acm_arn
 
   subnets          = module.vpc.app_subnets_ids # subnets what it has to create
   vpc_id           = module.vpc.vpc_id
 
 }
+
+
 
