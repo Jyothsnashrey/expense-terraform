@@ -43,6 +43,7 @@ resource "aws_launch_template" "main" {
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 
+
 resource "aws_autoscaling_group" "main" {
   name = "${local.name}-asg"
   desired_capacity    = var.instance_capacity
