@@ -3,6 +3,8 @@ project_name = "expense"
 kms_key_id  = "arn:aws:kms:us-east-1:046694289523:key/61697761-0640-4796-8fb9-1e709acec556"
 bastion_cidrs = ["172.31.45.81/32"]  #/32 represents one IP.
 acm_arn       = "arn:aws:acm:us-east-1:046694289523:certificate/32a0c8da-3f9c-466f-ad68-dbba56cd468a"
+
+
 #vpc = {
 #  main = {
 #    vpc_cidr = "10.10.0.0/21"
@@ -26,6 +28,8 @@ acm_arn       = "arn:aws:acm:us-east-1:046694289523:certificate/32a0c8da-3f9c-46
 #  }
 #}
 #
+
+
 vpc_cidr = "10.10.0.0/21"
     public_subnets_cidr = ["10.10.0.0/25","10.10.0.128/25"]
     app_subnets_cidr = ["10.10.1.0/25","10.10.1.128/25"]

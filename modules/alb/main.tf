@@ -45,8 +45,6 @@ resource "aws_lb" "main" {
 }
 
 
-
-
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.main.arn
   port              = "443"
@@ -56,7 +54,7 @@ resource "aws_lb_listener" "https" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.front_end.arn
+    target_group_arn = var.target_group_arn
   }
 }
 

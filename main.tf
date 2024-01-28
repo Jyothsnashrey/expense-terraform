@@ -99,9 +99,11 @@ module "public_alb" {
 
   project_name     = var.project_name
   env              = var.env
+  acm_arn          = var.acm_arn
 
   subnets          = module.vpc.public_subnets_id
   vpc_id           = module.vpc.vpc_id
+  target_group_arn = module.frontend.target_group_arn    ## because it is public LB we have to take frontend
 
 }
 
@@ -118,7 +120,7 @@ module "private_alb" {
 
   subnets          = module.vpc.app_subnets_ids # subnets what it has to create
   vpc_id           = module.vpc.vpc_id
-
+  target_group_arn = module.backend.target_group_arn
 }
 
 
