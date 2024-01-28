@@ -67,5 +67,14 @@ resource "aws_lb_target_group" "main" {
   port     = var.app_port      #if frontend 80 or 8080 for backend
   protocol = "HTTP"
   vpc_id   =  var.vpc_id
+
+
+  health_check {
+    path = "/health"
+    healthy_threshold = 2 # how many times you want to check the health
+    unhealthy_threshold = 2
+    interval = 5  #frequency of time you want to check it will check very 5 secs id target is good or bad this will be more responsive
+    timeout = 2 # timeout for health check
+  }
 }
 
