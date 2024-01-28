@@ -69,7 +69,7 @@ module "backend" {
   instance_capacity = var.backend_instance_capacity
   instance_type     = var.backend_instance_type
   project_name      = var.project_name
-  sg_cidr_blocks    = var.web_subnets_cidr
+  sg_cidr_blocks    = var.app_subnets_cidr #backend now taking to private load balancer so we changed from web sto app subnets
   vpc_id            = module.vpc.vpc_id
   vpc_zone_identifier = module.vpc.app_subnets_ids
 
