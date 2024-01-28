@@ -74,3 +74,11 @@ resource "aws_lb_listener" "http" {   # when someone hits http they should go to
     }
   }
 }
+
+resource "aws_route53_record" "www" {
+  zone_id = var.zone_id
+  name    = "${var.dns_name}-${var.env}"
+  type    = "CNAME"
+  ttl     = 300
+  records = [aws_lb.main.dns_name]
+}

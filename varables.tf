@@ -35,3 +35,6 @@ variable "frontend_instance_type" {}
 #load balancer
 
 variable "acm_arn" {}
+
+#dnf record
+variable "zone_id" {}
