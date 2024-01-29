@@ -50,17 +50,18 @@ resource "aws_launch_template" "main" {
   iam_instance_profile {
     name = aws_iam_instance_profile.main.name
   }
-}
   block_device_mappings {            #servers will come encrypted if we add this
-  device_name = "/dev/sda1"  #diskname from instance in aws
+    device_name = "/dev/sda1"  #diskname from instance in aws
 
-  ebs {
-    volume_size           = 10
-    encrypted             = true
-    kms_key_id            = var.kms
-    delete_on_termination = true
+    ebs {
+      volume_size           = 10
+      encrypted             = true
+      kms_key_id            = var.kms
+      delete_on_termination = true
+    }
   }
 }
+
 
 
 resource "aws_autoscaling_group" "main" {
