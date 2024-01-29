@@ -61,6 +61,7 @@ module "rds" {
   }
 
 module "backend" {
+  depends_on = [module.rds]   # since terraform don't have order we will don't run this backend un till rds is completed
   source            = "./modules/app"
   app_port          = var.backend_app_port
   bastion_cidrs     = var.bastion_cidrs
