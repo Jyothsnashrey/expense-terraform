@@ -116,12 +116,14 @@ resource "aws_iam_role" "main" {
           "Sid": "GetParameter",
           "Effect": "Allow",
           "Action": [
+            "kms:Decrypt",
             "ssm:GetParameterHistory",
             "ssm:GetParametersByPath",
             "ssm:GetParameters",
             "ssm:GetParameter"
           ],
           "Resource": concat([
+            "arn:aws:kms:us-east-1:046694289523:key/61697761-0640-4796-8fb9-1e709acec556",
             "arn:aws:ssm:us-east-1:046694289523:parameter/${var.env}.${var.project_name}.${var.component}.*"
           ],var.parameters) # by doing this we are concatinate 2 lists and backend will get an extra parameter while frontend will not have.
         },
