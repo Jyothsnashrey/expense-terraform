@@ -89,6 +89,11 @@ resource "aws_autoscaling_group" "main" {
     value               = local.name
     propagate_at_launch = true  # for each instance you provide the tag.
   }
+  tag {
+    key                 = "monitor"
+    value               = "yes"
+    propagate_at_launch = true  # for each instance you provide the tag.
+  }
 }
 
 resource "aws_lb_target_group" "main" {
