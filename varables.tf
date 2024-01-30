@@ -2,6 +2,7 @@ variable "env" {}
 variable "project_name" {}
 variable "kms_key_id" {}
 variable "bastion_cidrs" {}
+variable "prometheus_cidrs" {}
 
 #variable "rds"{}
 #variable "vpc"{}
@@ -38,3 +39,5 @@ variable "acm_arn" {}
 
 #dnf record
 variable "zone_id" {}
+
+#prometheus server

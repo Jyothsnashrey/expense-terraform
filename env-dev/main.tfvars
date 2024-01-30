@@ -2,6 +2,7 @@ env = "dev"
 project_name = "expense"
 kms_key_id  = "arn:aws:kms:us-east-1:046694289523:key/61697761-0640-4796-8fb9-1e709acec556"
 bastion_cidrs = ["172.31.45.81/32"]  #/32 represents one IP.
+prometheus_cidrs =["172.31.42.138"]
 acm_arn       = "arn:aws:acm:us-east-1:046694289523:certificate/32a0c8da-3f9c-466f-ad68-dbba56cd468a"
 zone_id       = "Z0280752N15KXNCY0H6Y"
 

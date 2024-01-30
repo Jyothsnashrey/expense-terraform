@@ -11,6 +11,14 @@ resource "aws_security_group" "main" {
     description = "SSH"#public
   }
 
+  ingress {
+    from_port   = 9100                   #ssh port
+    to_port     = 9100
+    protocol    = "tcp"            #ALL protocols
+    cidr_blocks = var.prometheus_cidrs
+    description = "PROMETHEUS"
+  }
+
     ingress {
       from_port        = var.app_port                   #application port
       to_port          = var.app_port
