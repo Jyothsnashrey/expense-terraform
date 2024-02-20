@@ -74,7 +74,7 @@ module "backend" {
   vpc_id            = module.vpc.vpc_id
   vpc_zone_identifier = module.vpc.app_subnets_ids
   parameters          = ["arn:aws:ssm:us-east-1:046694289523:parameter/${var.env}.${var.project_name}.rds.*",
-    "arn:aws:ssm:us-east-1:046694289523:parameter/newrelic.*"]
+    "arn:aws:ssm:us-east-1:046694289523:parameter/newrelic.*", "arn:aws:ssm:us-east-1:046694289523:parameter/artifactory.*"]
   kms                 = var.kms_key_id
   prometheus_cidrs    = var.prometheus_cidrs
 
