@@ -30,9 +30,6 @@ pipelines:
 
       - QA:
           fetch_materials: true
-          approval:
-            type: manual
-            allow_only_on_success: true
           jobs:
             deployment:
               timeout: 0
@@ -44,9 +41,7 @@ pipelines:
                       - -A
       - UAT:
           fetch_materials: true
-          approval:
-            type: manual
-            allow_only_on_success: true
+
           jobs:
             deployment:
               timeout: 0
@@ -59,9 +54,6 @@ pipelines:
 
       - PROD:
           fetch_materials: true
-          approval:
-            type: manual
-            allow_only_on_success: true
           jobs:
             deployment:
               timeout: 0
